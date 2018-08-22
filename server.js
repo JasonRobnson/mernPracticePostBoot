@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const auth = require('./routes/api/auth.js');
+const profile = require('./routes/api/profile.js');
+const posts = require('./routes/api/posts.js')
 
 const db = require('./config/keys').mongoURI;
+
+//CONNECT  TO MONGODB
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected'))
@@ -10,6 +15,11 @@ mongoose
 
 
 app.get('/', (req, res) => res.send('Hello Big Guy!!!'));
+
+//USE ROUTES
+app.use('/api/auth', auth);
+app.use('/api/profile', profile);
+app.use('/api/posts', posts);
 
 const port = process.env.PORT || 5000; 
 
