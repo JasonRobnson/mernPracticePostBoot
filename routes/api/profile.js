@@ -29,7 +29,7 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
   .catch( err => res.status(404).json(err));
 });
 
-//@route Get api/profile
+//@route POST  api/profile
 //@desc Create -or edit User Profile
 //@access Private
 router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => {
@@ -54,8 +54,25 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => 
   if(req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
   Profile.findOne({ user: req.user.id })
-  
-
+  .then(profile => {
+    if(profile) {
+      //UPDATE
+      Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true})
+      .then(profile => res.json(profile));
+    } else {
+      //Create
+      //Check if handle exist
+      Profile.findOne({ handle: profileFields }).then(profile => {
+        if(profile) {
+          errors.handle = 'That handle already exists';
+          res.status(400).json(errors);
+        }
+      
+        //save profile
+        new Profile(profileFields).save().then(profile => res.json(profile));
+      })
+    }
+  })
  });
 
 module.exports = router;
