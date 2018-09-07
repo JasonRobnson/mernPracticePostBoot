@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-
+const validateProfileInput = require('../../validation/profile')
 const Profile = require('../../models/Profile');
 const User= require('../../models/User');
 
@@ -20,6 +20,7 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
  const errors = {};
 
   Profile.findOne( { user: req.user.id})
+  .populate('user', ['name', 'avatar'])
   .then(profile => {
     if(!profile) {
       errors.noprofile = 'There is no profile for this user';
@@ -33,6 +34,13 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
 //@desc Create -or edit User Profile
 //@access Private
 router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => {
+
+  const { errors, isValid } = validateProfileInput(req.body); 
+  //Check Validation
+  if(!isValid) {
+    //return any errors
+    return res.status(400).json(errors);
+  }
   
   const profileFields = {};
   profileFields.user = req.user.id;
@@ -46,8 +54,10 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => 
   if(typeof req.body.skills !== 'undefined') {
     profileFields.skills = req.body.skills.split(',');
   }
+
   profileFields.social = {}; 
-  if(req.body.handle) profileFields.social.youtube = req.body.youtube;
+
+  if(req.body.youtube) profileFields.social.youtube = req.body.youtube;
   if(req.body.twitter) profileFields.social.twitter = req.body.twitter;
   if(req.body.facebook) profileFields.social.facebook = req.body.facebook;
   if(req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
@@ -62,7 +72,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => 
     } else {
       //Create
       //Check if handle exist
-      Profile.findOne({ handle: profileFields }).then(profile => {
+      Profile.findOne({ handle: profileFields.handle }).then(profile => {
         if(profile) {
           errors.handle = 'That handle already exists';
           res.status(400).json(errors);
