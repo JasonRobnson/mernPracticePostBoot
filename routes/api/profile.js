@@ -130,7 +130,7 @@ const { errors, isValid } = validateProfileInput(req.body);
         }
       
         //save profile
-        new Profile(profileFields).save().then(profile => res.json(profile));
+        // new Profile(profileFields).save().then(profile => res.json(profile));
       })
     }
   })
