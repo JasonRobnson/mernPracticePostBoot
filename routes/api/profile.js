@@ -136,13 +136,14 @@ const { errors, isValid } = validateProfileInput(req.body);
   })
  });
 
+
  //@route POST  api/profile/experience
 //@desc Create experience for profile
 //@access Private
-
 router.post('/experience', passport.authenticate('jwt', { session: false }), (req, res) => {
-  console.log(req)
+  console.log(req.body)
   const { errors, isValid } = validateExperienceInput(req.body); 
+  console.log( req.body )
     //Check Validation
      if(!isValid) {
      //return any errors
