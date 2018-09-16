@@ -202,6 +202,27 @@ router.post('/education', passport.authenticate('jwt', { session: false }), (req
   })
 })
 
+ //@route POST  api/profile/education
+//@desc Delete education for profile
+//@access Private
+
+router.delete('/education', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+  Profile.findOne({ user: req.user.id })
+  .then(profile => {
+    const newExp = {
+      school: req.body.school,
+      degree: req.body.degree,
+      fieldofstudy: req.body.fieldofstudy,
+      from: req.body.from,
+      to: req.body.to,
+      current: req.body.current,
+      description: req.body.description
+    }
+  })
+})
+
+    
 
 
 module.exports = router;
