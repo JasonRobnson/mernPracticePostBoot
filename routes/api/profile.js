@@ -206,14 +206,13 @@ router.post('/education', passport.authenticate('jwt', { session: false }), (req
 //@desc Delete education for profile
 //@access Private
 
-router.post('/experience/:exp_id', passport.authenticate('jwt', { session: false }), (req, res) => {
-  console.log(req.body)
+router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: false }), (req, res) => {
   Profile.findOne({ user: req.user.id })
   .then(profile => {
     //get remove index
     const removeIndex = profile.experience
     .map(item => item.id)
-    index(req.params.exp_id);
+    .indexOf(req.params.exp_id);
 
     //Splice out of array
     profile.experience.splice(removeIndex, 1);
