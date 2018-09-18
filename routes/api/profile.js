@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
+const validateProfileInput = require('../../validation/profile');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
@@ -168,7 +169,7 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
       
     profile.save().then(profile => res.json(profile));
   })
-})
+});
 
  //@route POST  api/profile/education
 //@desc Create education for profile
@@ -198,9 +199,9 @@ router.post('/education', passport.authenticate('jwt', { session: false }), (req
       
     profile.save().then(profile => res.json(profile));
   })
-})
+});
 
- //@route POST  api/profile/education
+ //@route Delete  api/profile/education
 //@desc Delete education for profile
 //@access Private
 
@@ -218,9 +219,9 @@ router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: fal
     //Save
     profile.save().then(profile => res.json(profile));
   })
-})
+});
 
-//@route POST  api/profile/education
+//@route Delete  api/profile/education
 //@desc Delete education for profile
 //@access Private
 
@@ -238,7 +239,17 @@ router.delete('/education/:edu_id', passport.authenticate('jwt', { session: fals
     //Save
     profile.save().then(profile => res.json(profile));
   })
-})
+});
 
+//@route Delete  api/profile
+//@desc Delete user  profile
+//@access Private
 
+router.delete('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Profile.findOneAndDelete({ user: req.user.id })
+  .then(() => {
+    User.findOneAndDelete({_id: req.user.id })
+    .then(() => res.json({ success: true}))
+  })
+});
 module.exports = router;
