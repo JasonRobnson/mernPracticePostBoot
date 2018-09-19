@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const Post = require('../../models/post.js')
+const Post = require('../../models/post.js');
+const validatePostInput = require('../../validation/post');
 
 
 //@route Get api/posts/test
@@ -14,7 +15,7 @@ router.get('/test', (req, res) => res.json({msg:'Posts Works'}));
 //@desc  post route
 //@access Private
 
-router.post('/', passport.authenticate('jwt',{ session: false }), (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   const newPost = new Post ({
     text: req.body.text,
     name: req.body.name,
@@ -23,5 +24,5 @@ router.post('/', passport.authenticate('jwt',{ session: false }), (req, res) => 
   });
   
   newPost.save().then(post => res.json(post));
-})
+});
 module.exports = router;
