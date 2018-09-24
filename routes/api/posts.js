@@ -27,7 +27,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     user: req.user.id
   });
   
-  console.log("this is a test")
   newPost.save().then(post => res.json(post));
 });
 module.exports = router;
