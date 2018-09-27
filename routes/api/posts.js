@@ -169,13 +169,9 @@ router.delete(
   '/comment/:id/:comment_id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log('Inside the req,res Block(req.params)' + req.params.id);
     Post.findById(req.params.id)
       .then(post => {
-        console.log('Inside the FindById Block' + post);
-        console.log('Inside the FindById Block (ReqParam)' + req.params.id);
-        console.log('conditional req.params.comment_id' + comment_id);
-        //check to see if comment exist
+        //check to see if comment exist;
         if (
           post.comments.filter(
             comment => comment._id.toString() === req.params.comment_id
@@ -186,10 +182,12 @@ router.delete(
             .json({ commentnotexist: 'Comment does not exist' });
         }
 
-        //Get remove index
-        const removeIndex = post.comments.map(item => item._id.toString());
-        indexOf(req.params.comment_id);
-        //Splice comment out of array
+        //Get remove idnex
+        const removeIndex = post.comments
+          .map(item => item._id.toString())
+          .indexOf(req.params.comment_id);
+
+        //Splice out comment
         post.comments.splice(removeIndex, 1);
 
         post.save().then(post => res.json(post));
