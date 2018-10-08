@@ -27,7 +27,7 @@ class Register extends Component {
     axios
       .post('/api/auth/register', newUser)
       .then(res => console.log(res.data))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response.data));
   };
   render() {
     return (
