@@ -1,6 +1,6 @@
 import { TEST_DISPATCH } from './types';
 
-export const registeruser = userDate => {
+export const registerUser = userData => {
   return {
     type: TEST_DISPATCH,
     payload: userData
