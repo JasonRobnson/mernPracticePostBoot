@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
@@ -16,6 +16,13 @@ class Register extends Component {
     };
   }
 
+  //componentWillReceiveProps has been depreciated will have to update to getDerivedStateFromProps  in the future.....This will no longer work within the function block.
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -28,18 +35,15 @@ class Register extends Component {
       password2: this.state.password2
     };
     console.log(newUser);
-    this.props.registerUser(newUser);
-    // axios
-    //   .post('/api/auth/register', newUser)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => this.setState({ errors: err.response.data }));
+
+    //this.props.history allows to redirect from within this action via withRouter
+    this.props.registerUser(newUser, this.props.history);
   };
   render() {
     const { errors } = this.state;
-    const { user } = this.props.auth;
+
     return (
       <div className="register">
-        {user ? user.name : null}
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -132,12 +136,14 @@ class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 export default connect(
   mapStateToProps,
   { registerUser }
-)(Register);
+)(withRouter(Register));
