@@ -15,7 +15,11 @@ class Register extends Component {
       errors: {}
     };
   }
-
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
   //componentWillReceiveProps has been depreciated will have to update to getDerivedStateFromProps  in the future.....This will no longer work within the function block.
 
   componentWillReceiveProps(nextProps) {
