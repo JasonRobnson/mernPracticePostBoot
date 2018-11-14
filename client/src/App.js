@@ -6,16 +6,15 @@ import store from './store.js';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
-
+import { clearCurrentProfile } from './actions/profileActions';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
-import Dashboard from './components/dashboard/Dashboard.js';
+import Dashboard from './components/dashboard/Dashboard';
 
 import './App.css';
-import { clearCurrentProfile } from './actions/profileActions.js';
 
 //check for token
 if (localStorage.jwtToken) {
@@ -31,8 +30,8 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     //Logout user
     store.dispatch(logoutUser());
-    //TODO: Clear current Profile
-
+    // Clear current Profile
+    store.dispatch(clearCurrentProfile());
     //Redirect to login
     window.location.href = '/login';
   }
