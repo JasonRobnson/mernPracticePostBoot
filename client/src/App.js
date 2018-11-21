@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import store from './store.js';
@@ -13,6 +13,7 @@ import Landing from './components/layout/Landing';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/common/privateRoute';
 
 import './App.css';
 
@@ -48,7 +49,9 @@ class App extends Component {
             <div className="container" />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/Register" component={Register} />
-            <Route exact path="/dashboard" component={Dashboard} />
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
             <Footer />
           </div>
         </Router>
