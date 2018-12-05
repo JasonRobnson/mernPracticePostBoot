@@ -6,6 +6,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 // import InputGroup from '../common/TextfieldGroup';
 // import SelectListGroup from '../common/TextfieldGroup';
 
+
 class CreateProfile extends Component {
   constructor(props) {
     super(props);
@@ -33,11 +34,13 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+
               <h1 className="display-4 text-center">Create Your Profile</h1>
               <p className="lead text-center">
                 Let's get some information to make your profile!
               </p>
               <small className="d-block pb-3">*=required fields</small>
+
             </div>
           </div>
         </div>

@@ -29,11 +29,6 @@ class Dashboard extends Component {
           ));
     };
     returnDasboardStatus(profile, loading);
-    //   if(profile == null || loading) {
-    //     dashboardContent = <h4> Loading...<h4>
-    // }  else { (dashboardContent = <h1>Hello</h1>)
-    //   dashboardContent = <h1>Hello</h1>
-    // }
 
     return (
       <div className="dashboard">

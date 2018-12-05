@@ -51,7 +51,14 @@ class App extends Component {
             <Route exact path="/Login" component={Login} />
             <Route exact path="/Register" component={Register} />
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/Dashboard" component={Dashboard} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/Create-profile"
+                component={CreateProfile}
+              />
             </Switch>
             <Switch>
               <PrivateRoute
