@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
-// import TextAreaFieldGroup from '../common/TextfieldGroup';
-// import InputGroup from '../common/TextfieldGroup';
-// import SelectListGroup from '../common/TextfieldGroup';
-
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import InputGroup from '../common/InputGroup';
+import SelectListGroup from '../common/SelectListGroup';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -27,20 +26,36 @@ class CreateProfile extends Component {
       instagram: '',
       errors: {}
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    console.log("You've clicked the submit button");
   }
   render() {
+    const { errors } = this.state;
     return (
       <div className="create-profile">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-
               <h1 className="display-4 text-center">Create Your Profile</h1>
               <p className="lead text-center">
                 Let's get some information to make your profile!
               </p>
               <small className="d-block pb-3">*=required fields</small>
-
+              <form onSubmit={this.onSubmit}>
+                <TextFieldGroup
+                  placeholder="* Profile Handle"
+                  name="handle"
+                  value={this.state.handle}
+                  onChange={this.onChange}
+                  errors={errors.handle}
+                  info="A unique handle for your profile URL. Your full name, company name, nickname, "
+                />
+              </form>
             </div>
           </div>
         </div>
