@@ -34,8 +34,28 @@ class CreateProfile extends Component {
     e.preventDefault();
     console.log("You've clicked the submit button");
   }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
   render() {
     const { errors } = this.state;
+
+    // select options for status
+    const options = [
+      {
+        label: '* Select Personal Status',
+        value: 0
+      },
+      { label: 'Single', value: 'Single' },
+      { label: 'Married', value: 'Married' },
+      { label: 'UnCertain', value: 'UnCertain' },
+      { label: 'Open', value: 'Open' },
+      { label: 'Complicated', value: 'Complicated' },
+      { label: 'Panaramic', value: 'Panaramic' },
+      { label: 'Who knows', value: 'Who knows' },
+      { label: 'Other', value: 'Other' }
+    ];
     return (
       <div className="create-profile">
         <div className="container">
@@ -54,6 +74,15 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   errors={errors.handle}
                   info="A unique handle for your profile URL. Your full name, company name, nickname, "
+                />
+                <SelectListGroup
+                  placeholder="* Status"
+                  name="status"
+                  value={this.state.status}
+                  onChange={this.onChange}
+                  options={options}
+                  errors={errors.status}
+                  info="What's your current situation?"
                 />
               </form>
             </div>
