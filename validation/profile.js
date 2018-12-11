@@ -52,7 +52,6 @@ module.exports = function validateProfileInput(data) {
       errors.linkedin = 'Not a valid Url';
     }
   }
-  console.log(errors);
   return {
     errors,
     isValid: isEmpty(errors)
