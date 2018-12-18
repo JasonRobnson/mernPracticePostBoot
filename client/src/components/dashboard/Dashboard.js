@@ -17,7 +17,14 @@ class Dashboard extends Component {
       return profile == null || loading
         ? (dashboardContent = <Spinner />)
         : Object.keys(profile).length > 0
-        ? (dashboardContent = <h4>Display Profile: TODO</h4>)
+        ? (dashboardContent = (
+            <div>
+              <p className="lead text-muted">
+                Welcome{' '}
+                <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+              </p>
+            </div>
+          ))
         : (dashboardContent = (
             <div>
               <p className="lead text-muted">Welcome {user.name}</p>
