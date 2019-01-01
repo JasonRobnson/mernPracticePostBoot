@@ -25,10 +25,14 @@ class AddExperience extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   onSubmit(e) {
     e.preventDefault();
-    console.log('submit');
     const expData = {
       company: this.state.company,
       title: this.state.title,
