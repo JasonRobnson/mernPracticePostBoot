@@ -25,10 +25,14 @@ class AddExperience extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   onSubmit(e) {
     e.preventDefault();
-    console.log('submit');
     const expData = {
       company: this.state.company,
       title: this.state.title,
@@ -84,8 +88,8 @@ class AddExperience extends Component {
                 />
                 <TextFieldGroup
                   placeholder="* Location"
-                  name="Location"
-                  value={this.state.Location}
+                  name="location"
+                  value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
                 />
@@ -144,7 +148,7 @@ class AddExperience extends Component {
 }
 
 AddExperience.prototypes = {
-  addExperience: PropTypes.object.isRequired,
+  addExperience: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };

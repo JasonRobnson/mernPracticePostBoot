@@ -39,7 +39,6 @@ class CreateProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.state);
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
