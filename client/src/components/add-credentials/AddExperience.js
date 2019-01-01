@@ -88,8 +88,8 @@ class AddExperience extends Component {
                 />
                 <TextFieldGroup
                   placeholder="* Location"
-                  name="Location"
-                  value={this.state.Location}
+                  name="location"
+                  value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
                 />
@@ -148,7 +148,7 @@ class AddExperience extends Component {
 }
 
 AddExperience.prototypes = {
-  addExperience: PropTypes.object.isRequired,
+  addExperience: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
