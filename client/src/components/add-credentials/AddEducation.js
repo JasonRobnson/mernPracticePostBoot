@@ -42,7 +42,6 @@ class AddEducation extends Component {
       current: this.state.current,
       description: this.state.description
     };
-    console.log(eduData.from);
     this.props.addEducation(eduData, this.props.history);
   }
 
