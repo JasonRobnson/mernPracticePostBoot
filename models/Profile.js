@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
   user: {
@@ -7,12 +7,12 @@ const ProfileSchema = new Schema({
     ref: 'user'
   },
   handle: {
-    type: String, 
-    required: true, 
+    type: String,
+    required: true,
     max: 40
   },
   company: {
-    type: String, 
+    type: String
   },
   website: {
     type: String
@@ -29,7 +29,7 @@ const ProfileSchema = new Schema({
     requidred: true
   },
   bio: {
-    type: String, 
+    type: String
   },
   githubusername: {
     type: String
@@ -53,8 +53,7 @@ const ProfileSchema = new Schema({
         required: true
       },
       to: {
-        type: Date,
-        required: true
+        type: Date
       },
       current: {
         type: Boolean,
@@ -63,8 +62,6 @@ const ProfileSchema = new Schema({
       description: {
         type: String
       }
-
-
     }
   ],
   education: [
@@ -103,16 +100,16 @@ const ProfileSchema = new Schema({
       type: String
     },
     twitter: {
-      type: String 
+      type: String
     },
     instagram: {
-      type: String 
+      type: String
     },
     facebook: {
-      type: String 
+      type: String
     },
     linkedin: {
-      type: String 
+      type: String
     },
     date: {
       type: Date,
@@ -120,6 +117,5 @@ const ProfileSchema = new Schema({
     }
   }
 });
-
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
