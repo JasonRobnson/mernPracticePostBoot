@@ -13,6 +13,7 @@ import Landing from './components/layout/Landing';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Profiles from './components/profiles/Profiles';
 import PrivateRoute from './components/common/privateRoute';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
@@ -53,6 +54,7 @@ class App extends Component {
             <div className="container" />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/Register" component={Register} />
+            <Route exact path="/profiles" component={Profiles} />
             <Switch>
               <PrivateRoute exact path="/Dashboard" component={Dashboard} />
             </Switch>
