@@ -25,6 +25,7 @@ router.post('/register', (req, res) => {
  
   //Destructuring
   const { errors, isValid } = validateRegisterInput(req.body);
+  console.log(isValid)
   //check validation
   if(!isValid) {
     return res.status(400).json(errors)
