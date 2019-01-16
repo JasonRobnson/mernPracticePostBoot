@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Proptypes from 'props-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import isEmpty from '../../validation/is-empty';
 
@@ -29,10 +29,25 @@ class ProfileItem extends Component {
               View Profile
             </Link>
           </div>
+          <div className="md-4 d-none d-md-block">
+            <h4>Skill Set</h4>
+            <ul className="list-group">
+              {profile.skills.slice(0, 4).map((skills, index) => (
+                <li key={index} className="list-group-item">
+                  <i className="fa fa-check pr-1" />
+                  {skills}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     );
   }
 }
+
+ProfileItem.Proptypes = {
+  profile: PropTypes.object.isRequired
+};
 
 export default ProfileItem;
