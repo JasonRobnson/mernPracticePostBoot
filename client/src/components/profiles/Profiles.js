@@ -43,7 +43,7 @@ class Profiles extends Component {
 }
 
 PropTypes.propTypes = {
-  getProfiles: PropTypes.func.isRequired,
+  getProfileByHandle: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
