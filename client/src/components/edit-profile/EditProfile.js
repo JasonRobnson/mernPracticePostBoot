@@ -142,7 +142,7 @@ class CreateProfile extends Component {
           />
           <InputGroup
             placeholder="LinkedIN Profile URL"
-            name="LinkedIN"
+            name="linkedin"
             icon="fab fa-linkedin"
             value={this.state.linkedin}
             onChange={this.onChange}
@@ -158,7 +158,7 @@ class CreateProfile extends Component {
           />
           <InputGroup
             placeholder="Instagram Profile URL"
-            name="Instagram"
+            name="instagram"
             icon="fab fa-instagram"
             value={this.state.instagram}
             onChange={this.onChange}
