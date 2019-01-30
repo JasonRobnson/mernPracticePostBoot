@@ -49,6 +49,7 @@ PropTypes.propTypes = {
 const mapStateToProps = state => ({
   profile: state.profile
 });
+
 export default connect(
   mapStateToProps,
   { getProfiles }

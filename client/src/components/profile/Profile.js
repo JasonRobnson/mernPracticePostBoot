@@ -14,9 +14,10 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
+    console.log(this.props);
   }
   render() {
-    const { profile, loading } = this.props;
+    const { profile, loading } = this.props.profile;
 
     let profileContent;
 
@@ -53,9 +54,13 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+PropTypes.propTypes = {
   getProfileByHandle: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile
 });
 export default connect(
   mapStateToProps,
