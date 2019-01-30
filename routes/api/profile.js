@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -54,7 +53,6 @@ router.get('/all', (req, res) => {
 //@desc Get Profile by handle
 //@access Public
 router.get('/handle/:handle', (req, res) => {
-  console.log(req.params.handle);
   Profile.findOne({ handle: req.params.handle })
     .populate('user', ['name', 'avatar'])
     .then(profile => {
@@ -152,9 +150,8 @@ router.post(
   '/experience',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
- 
     const { errors, isValid } = validateExperienceInput(req.body);
-    
+
     //Check Validation
     if (!isValid) {
       //return any errors

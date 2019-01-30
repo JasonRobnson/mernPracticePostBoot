@@ -16,7 +16,8 @@ class Profile extends Component {
     }
   }
   render() {
-    const { profile, loading } = this.props.profile;
+    const { profile, loading } = this.props;
+
     let profileContent;
 
     if (profile === null || loading) {
@@ -32,7 +33,8 @@ class Profile extends Component {
             </div>
             <div className="col-md-6" />
           </div>
-          <ProfileHeader />
+
+          <ProfileHeader profile={profile} />
           <ProfileAbout />
           <ProfileCreds />
           <ProfileGithub />

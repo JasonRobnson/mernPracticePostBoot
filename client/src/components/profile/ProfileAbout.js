@@ -6,7 +6,7 @@ class ProfileAbout extends Component {
       <div>
         <h1>Profile About</h1>
       </div>
-    )
+    );
   }
 }
 

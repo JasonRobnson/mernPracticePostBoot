@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import isEmpty from '../../validation/is-empty';
 
 class ProfileHeader extends Component {
-  render() {
+  render(props) {
+    const { profile } = this.props;
+
     return (
-      <div>
-        <h1>Profile Header</h1>
+      <div class="row">
+        <h1>Header</h1>
       </div>
     );
   }
