@@ -14,7 +14,6 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
-    console.log(this.props);
   }
   render() {
     const { profile, loading } = this.props.profile;
@@ -36,7 +35,7 @@ class Profile extends Component {
           </div>
 
           <ProfileHeader profile={profile} />
-          <ProfileAbout />
+          <ProfileAbout profile={profile} />
           <ProfileCreds />
           <ProfileGithub />
         </div>
