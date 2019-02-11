@@ -40,6 +40,8 @@ class Profile extends Component {
             education={profile.education}
             experience={profile.experience}
           />
+
+          {/* revisit oath section to implement this feature in the future */}
       {profile.githubusername ? (<ProfileGithub username ={profile.githubusername}/> ): null}
           
         </div>
