@@ -7,7 +7,7 @@ import { deletePost } from '../../actions/postActions';
 
 class PostItem extends Component {
   onDeleteClick(id) {
-    console.log(id);
+    this.props.deletePost(id);
   }
   render() {
     const { post, auth } = this.props;
