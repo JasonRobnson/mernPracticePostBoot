@@ -16,7 +16,9 @@ class PostItem extends Component {
     this.props.removeLike(id);
   }
   findUserLike(likes) {
+    console.log('This is from the PostItem component:', likes);
     const { auth } = this.props;
+
     if (likes.filter(like => like.user === auth.user.id).length > 0) {
       return true;
     } else {
@@ -24,7 +26,7 @@ class PostItem extends Component {
     }
   }
   render() {
-    const { post, auth } = this.props;
+    const { post, posts, auth, showActions } = this.props;
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -53,24 +55,28 @@ class PostItem extends Component {
               />
               <span className="badge badge-light">{post.likes.length}</span>
             </button>
-            <button
-              onClick={this.onUnlikeClick.bind(this, post._id)}
-              type="button"
-              className="btn btn-light mr-1"
-            >
-              <i className="text-secondary fas fa-thumbs-down" />
-            </button>
-            <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-              Comments
-            </Link>
-            {post.user === auth.user.id ? (
-              <button
-                onClick={this.onDeleteClick.bind(this, post._id)}
-                type="button"
-                className="btn btn-danger mr-1"
-              >
-                <i className="fas fa-times" />
-              </button>
+            {showActions ? (
+              <span>
+                <button
+                  onClick={this.onUnlikeClick.bind(this, post._id)}
+                  type="button"
+                  className="btn btn-light mr-1"
+                >
+                  <i className="text-secondary fas fa-thumbs-down" />
+                </button>
+                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+                  Comments
+                </Link>
+                {post.user === auth.user.id ? (
+                  <button
+                    onClick={this.onDeleteClick.bind(this, post._id)}
+                    type="button"
+                    className="btn btn-danger mr-1"
+                  >
+                    <i className="fas fa-times" />
+                  </button>
+                ) : null}{' '}
+              </span>
             ) : null}
           </div>
         </div>
@@ -78,6 +84,9 @@ class PostItem extends Component {
     );
   }
 }
+PostItem.defaultProps = {
+  showActions: true
+};
 PostItem.propTypes = {
   deletePost: PropTypes.func.isRequired,
   addLike: PropTypes.func.isRequired,
