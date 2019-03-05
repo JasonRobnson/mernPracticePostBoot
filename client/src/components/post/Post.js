@@ -7,6 +7,10 @@ import Spinner from '../common/Spinner';
 import { getPost } from '../../actions/postActions';
 
 class Post extends Component {
+  // gets the single post and passes in the id from the params
+  componentDidMount() {
+    this.props.getPost(this.props.match.params.id);
+  }
   render() {
     const { post, loading } = this.props;
     console.log('This is from the Post component', post);
@@ -17,6 +21,7 @@ class Post extends Component {
       postContent = (
         <div>
           <PostItem post={post} showActions={false} />
+          <h1>Comments</h1>
         </div>
       );
     }

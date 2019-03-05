@@ -22,9 +22,11 @@ router.get('/', (req, res) => {
 });
 
 //@route Get  api/posts/:id
-//@desc  get posts
+//@desc  get post with specific id
 //@access Public
 router.get('/:id', (req, res) => {
+  console.log(req.params);
+  console.log('The posts/:id route was hit!');
   Post.findById(req.params.id)
     .then(post => res.json(post))
     .catch(err =>
