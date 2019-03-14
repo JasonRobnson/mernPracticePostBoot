@@ -12,8 +12,8 @@ class Post extends Component {
     this.props.getPost(this.props.match.params.id);
   }
   render() {
-    const { post, loading } = this.props;
-    console.log('This is from the Post component', post);
+    const { post, loading } = this.props.post;
+    console.log('This is from the Post component :', post);
     let postContent;
     if (post === null || loading || Object.keys(post).length === 0) {
       postContent = <Spinner />;
@@ -21,7 +21,6 @@ class Post extends Component {
       postContent = (
         <div>
           <PostItem post={post} showActions={false} />
-          <h1>Comments</h1>
         </div>
       );
     }
