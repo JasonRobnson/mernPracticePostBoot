@@ -5,6 +5,9 @@ import { deleteComment } from '../../actions/postActions';
 import { PROFILE_LOADING } from '../../actions/types';
 
 class CommentItem extends Component {
+  onDeleteClick(postId, commentId) {
+    this.props.deleteComment(postId, commentId);
+  }
   render() {
     const { comment, postId, auth } = this.props;
     return (
