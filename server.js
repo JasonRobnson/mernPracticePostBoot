@@ -7,9 +7,10 @@ const posts = require('./routes/api/posts.js');
 const bodyParser = require('body-parser');
 const db = require('./config/keys').mongoURI;
 const passport = require('passport');
+const path = require('path');
 
-//Body Parser middleware 
-app.use(bodyParser.urlencoded({extended: false}));
+//Body Parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //CONNECT  TO MONGODB
@@ -29,7 +30,16 @@ app.use('/api/auth', auth);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 
-const port = process.env.PORT || 5000; 
+//Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  //Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(_dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
-
