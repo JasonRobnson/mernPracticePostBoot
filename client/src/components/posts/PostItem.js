@@ -16,7 +16,6 @@ class PostItem extends Component {
     this.props.removeLike(id);
   }
   findUserLike(likes) {
-    console.log('This is from the PostItem component:', likes);
     const { auth } = this.props;
 
     if (likes.filter(like => like.user === auth.user.id).length > 0) {

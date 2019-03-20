@@ -15,7 +15,7 @@ class Post extends Component {
   }
   render() {
     const { post, loading } = this.props.post;
-    console.log('This is from the Post component :', post);
+
     let postContent;
     if (post === null || loading || Object.keys(post).length === 0) {
       postContent = <Spinner />;
