@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteComment } from '../../actions/postActions';
-import { PROFILE_LOADING } from '../../actions/types';
 
 class CommentItem extends Component {
   onDeleteClick(postId, commentId) {
